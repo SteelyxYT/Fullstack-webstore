@@ -4,12 +4,16 @@ export default function DeleteProduct() {
 
     const [products, setProducts] = useState([])
 
+    const [status, setStatus] = useState('')
+
+    const fetchProducts = async () => {
+        const response = await fetch('http://localhost:80/api/v1/products');
+        const data = await response.json();
+        setProducts(data);
+    }
+
     useEffect(() => {
-        const fetchProducts = async () => {
-            const response = await fetch('http://localhost:80/api/v1/products');
-            const data = await response.json();
-            setProducts(data);
-        }
+        
         fetchProducts();
 
         const refresh = setInterval(() => fetchProducts(), 1000 * 60 * 5);
@@ -30,6 +34,14 @@ export default function DeleteProduct() {
                 'Content-Type': 'application/json'
             }
         })
+        if (response.status === 200) {
+            setStatus('Product deleted')
+        } else {
+            const data = await response.json()
+            setStatus('Error deleting product:' + data.error)
+        }
+
+        fetchProducts();
     }
 
     return (
@@ -41,6 +53,7 @@ export default function DeleteProduct() {
                     <option value={product.ProductID} key={product.ProductID}>{product.ProductID} - {product.ProductName}</option>
                 ))}
             </select>
+            <p>{status}</p>
             <button onClick={Delete}>Delete</button>
         </div>
     )

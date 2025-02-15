@@ -8,7 +8,7 @@ async function GetCategories(req, res) {
     res.send(categories[0]);
   } catch (error) {
     console.error('Error getting categories:', error);
-    res.status(500).send('Error getting categories');
+    res.status(500).send({error: 'Error getting categories'});
   }
 }
 

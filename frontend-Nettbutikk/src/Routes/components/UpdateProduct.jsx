@@ -5,6 +5,7 @@ export default function UpdateProduct() {
     const [productList, setProductList] = useState([])
     const [product, setProduct] = useState(0)
     const [categories, setCategories] = useState([])
+    const [status, setStatus] = useState('')
 
     // Form fields
     const [productName, setProductName] = useState('')
@@ -53,6 +54,12 @@ export default function UpdateProduct() {
             body: JSON.stringify({ ProductName: productName ? productName : product.ProductName, Description: description ? description : product.Description, Price: price ? price : product.Price, CategoryID: category ? category : product.CategoryID, Image: image ? image : product.Image })
         })
 
+        if (response.status === 200) {
+            setStatus('Product updated')
+        } else {
+            const data = await response.json()
+            setStatus('Error updating product:' + data.error)
+        }
     }
 
     return (
@@ -74,6 +81,7 @@ export default function UpdateProduct() {
                     ))}
                 </select>
                 <input type="text" disabled={product ? false : true} placeholder={product ? image : ""} onChange={(event) => setImage(event.target.value)} />
+            <p>{status}</p>
             <button onClick={updateSelectedProduct}>Update Product</button>
         </div>
     )

@@ -65,7 +65,6 @@ export default function UpdateProduct() {
     return (
         <div className="productform">
             <h1>Update Product</h1>
-            <label htmlFor="product">Select product</label>
             <select onChange={(event) => {setProduct(productList.find(product => product.ProductID == event.target.value)); updateFormVariables(productList.find(product => product.ProductID == event.target.value))}} >
                 <option value={0}>Choose a product</option>
                 {productList.map(product => (

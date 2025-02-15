@@ -7,6 +7,7 @@ export function Navigation() {
       <div className="productNav">
         <NavLink className={"NavBtn"} to="/" end>Home</NavLink>
         <NavLink className={"NavBtn"} to="/" end>Products</NavLink>
+        <NavLink className={"NavBtn"} to="/" end>Categories</NavLink>
       </div>
           
           <input type="text" placeholder="Search" />

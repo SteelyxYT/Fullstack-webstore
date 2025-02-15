@@ -55,7 +55,7 @@ export default function CreateProduct() {
             <textarea name="description" id="description" cols="30" rows="10" placeholder="description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
             <input type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
             <select name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
-                <option value={0}></option>
+                <option value={0}>Choose a category</option>
                 {categories.map(category => (
                     <option value={category.CategoryID} key={category.CategoryID}>{category.CategoryID} - {category.Category}</option>
                 ))}

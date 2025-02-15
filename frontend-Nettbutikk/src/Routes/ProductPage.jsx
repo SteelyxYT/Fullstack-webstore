@@ -28,7 +28,7 @@ export default function ProductPage() {
             <div>
             <h1>{product.ProductName}</h1>
             <p>{product.Description}</p>
-
+            <button>Kjøp</button>
             </div>
         </div>
         </div>

@@ -48,7 +48,7 @@ export default function DeleteProduct() {
         <div className='productform'>
             <h1>Delete Product</h1>
             <select onChange={(event) => setProduct(products.find(product => product.ProductID == event.target.value))}>
-                <option value={0}></option>
+                <option value={0}>Choose a product</option>
                 {products.map(product => (
                     <option value={product.ProductID} key={product.ProductID}>{product.ProductID} - {product.ProductName}</option>
                 ))}

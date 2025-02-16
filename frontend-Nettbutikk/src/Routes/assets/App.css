@@ -36,6 +36,10 @@
   border-radius: 20px;
 }
 
+.product:hover {
+  cursor: pointer;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

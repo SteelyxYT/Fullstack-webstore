@@ -4,6 +4,10 @@ module.exports = async (req, res) => {
 
     const auth = req.headers.authorization;
 
+    if (req.body.CategoryID == 0) {
+        return res.status(400).send({error: 'Missing category ID'});
+    }
+
     try {
         const connection = await database.connect();
 

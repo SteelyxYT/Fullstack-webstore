@@ -7,6 +7,10 @@ module.exports = async (req, res) => {
 
   const target = req.body.UserID;
 
+  if (!target) {
+    return res.status(400).send('Missing user ID');
+  }
+
   try {
     const connection = await database.connect();
 

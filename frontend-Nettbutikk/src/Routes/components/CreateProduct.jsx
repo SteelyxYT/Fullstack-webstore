@@ -8,7 +8,7 @@ export default function CreateProduct() {
 
     const [productName, setProductName] = useState('')
     const [description, setDescription] = useState('')
-    const [price, setPrice] = useState(0)
+    const [price, setPrice] = useState()
     const [category, setCategory] = useState(0)
 
     const fetchCategories = async () => {

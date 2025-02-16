@@ -20,6 +20,31 @@ export default function ProductPage() {
         fetchProduct();
     }, [id]);
 
+    async function Buy() {
+        const checkUser = localStorage.getItem('token')
+        if (!checkUser) {
+            alert('Du må være logget inn for å kjøpe en produkt!')
+        } else {
+            const localCart = localStorage.getItem('cart')
+            const cartData = localCart ? JSON.parse(localCart) : []
+            console.log(cartData)
+            const productInCart = cartData.find((product) => product.id === Number.parseInt(id))
+            console.log(productInCart)
+            if (productInCart === undefined) {
+                cartData.push({id: product.ProductID, name: product.ProductName, price: product.Price, image: product.Image, quantity: 1})
+                localStorage.setItem('cart', JSON.stringify(cartData))
+                alert('Produktet er lagt til i handlekurven')
+                return
+            } else {
+                const index = cartData.findIndex(product => product.id === Number.parseInt(id))
+                cartData[index].quantity += 1
+                localStorage.setItem('cart', JSON.stringify(cartData))
+                alert('Produktet er lagt til i handlekurven')
+                return
+            }
+        }
+    }
+
     return (
         <div className="productPage">
             <Navigation />
@@ -28,7 +53,7 @@ export default function ProductPage() {
             <div>
             <h1>{product.ProductName}</h1>
             <p>{product.Description}</p>
-            <button>Kjøp</button>
+            <button onClick={Buy}>Kjøp</button>
             </div>
         </div>
         </div>

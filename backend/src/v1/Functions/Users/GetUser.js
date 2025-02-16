@@ -2,7 +2,7 @@ const database = require('../../Data/Database.js');
 
 async function GetUser(req, res) {
 
-  const auth = req.headers.authorization;
+  const user = req.params.id;
 
   try {
     const connection = await database.connect();

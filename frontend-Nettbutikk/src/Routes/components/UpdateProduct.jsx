@@ -29,7 +29,7 @@ export default function UpdateProduct() {
         }
         fetchCategories();
 
-        const refresh = setInterval(() => { fetchProducts(); fetchCategories()}, 1000 * 60 * 5);
+        const refresh = setInterval(() => { fetchProducts(); fetchCategories() }, 1000 * 60 * 5);
 
         return () => clearInterval(refresh);
 
@@ -40,6 +40,7 @@ export default function UpdateProduct() {
         setDescription(product ? product.Description : "")
         setPrice(product ? product.Price : 0)
         setCategory(product ? product.CategoryID : 0)
+        setImage(product ? product.Image : "")
     }
 
     async function updateSelectedProduct() {
@@ -65,27 +66,27 @@ export default function UpdateProduct() {
     return (
         <div className="productform">
             <h1>Update Product</h1>
-            <select onChange={(event) => {setProduct(productList.find(product => product.ProductID == event.target.value)); updateFormVariables(productList.find(product => product.ProductID == event.target.value))}} >
+            <select onChange={(event) => { setProduct(productList.find(product => product.ProductID == event.target.value)); updateFormVariables(productList.find(product => product.ProductID == event.target.value)) }} >
                 <option value={0}>Choose a product</option>
                 {productList.map(product => (
                     <option value={product.ProductID} key={product.ProductID}>{`${product.ProductID} - ${product.ProductName}`}</option>
                 ))}
             </select>
-                <label htmlFor="productName">Product Name</label>
-                <input type="text" name="productName" disabled={product ? false : true} value={product ? productName : ""} onChange={(event) => setProductName(event.target.value)} />
-                <label htmlFor="description">Description</label>
-                <textarea name="description" disabled={product ? false : true} cols="30" rows="10" value={product ? description : ""} onChange={(event) => setDescription(event.target.value)}></textarea>
-                <label htmlFor="price">Price</label>
-                <input type="number" name="price" disabled={product ? false : true} value={product ? price : ""} onChange={(event) => setPrice(event.target.value)} />
-                <label htmlFor="category">Category</label>
-                <select name="category" disabled={product ? false : true} value={product ? category : ""} onChange={(event) => setCategory(event.target.value)} >
-                    <option value={0}></option>
-                    {categories.map(category => (
-                        <option value={category.CategoryID} key={category.CategoryID}>{category.Category}</option>
-                    ))}
-                </select>
-                <label htmlFor="image">image</label>
-                <input type="text" name="image" disabled={product ? false : true} placeholder={product ? image : ""} onChange={(event) => setImage(event.target.value)} />
+            <label htmlFor="productName">Product Name*</label>
+            <input type="text" name="productName" disabled={product ? false : true} placeholder={product ? productName : ""} onChange={(event) => setProductName(event.target.value)} />
+            <label htmlFor="description">Description*</label>
+            <textarea name="description" disabled={product ? false : true} cols="30" rows="10" placeholder={product ? description : ""} onChange={(event) => setDescription(event.target.value)}></textarea>
+            <label htmlFor="price">Price*</label>
+            <input type="number" name="price" disabled={product ? false : true} placeholder={product ? price : ""} onChange={(event) => setPrice(event.target.value)} />
+            <label htmlFor="category">Category*</label>
+            <select name="category" disabled={product ? false : true} value={product ? category : ""} onChange={(event) => setCategory(event.target.value)} >
+                <option value={0}></option>
+                {categories.map(category => (
+                    <option value={category.CategoryID} key={category.CategoryID}>{category.Category}</option>
+                ))}
+            </select>
+            <label htmlFor="image">image</label>
+            <input type="text" name="image" disabled={product ? false : true} placeholder={product ? image : ""} onChange={(event) => setImage(event.target.value)} />
             <p>{status}</p>
             <button onClick={updateSelectedProduct}>Update Product</button>
         </div>
